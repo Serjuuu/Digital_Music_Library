@@ -1,0 +1,77 @@
+
+/* App.module.css */
+.appContainer {
+  background-color: green;
+  width: 100%;
+  height: 100vh; /* Full height for 1080p */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.appTitle {
+  color: yellow;
+  font-size: 36px; /* Adjust size as needed */
+  margin-bottom: 20px;
+}
+
+.searchInput {
+  padding: 10px;
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+.searchButton {
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.suggestionsList {
+  list-style-type: disc;
+  padding-left: 20px; /* Adjust this value for closer dots */
+}
+
+.suggestionItem {
+  padding: 5px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  margin-bottom: 5px;
+  cursor: pointer;
+  list-style-position: inside; /* Move the dot closer to the text */
+}
+
+.suggestionItem:hover {
+  background-color: #f0f0f0;
+}
+
+.artistsList, .albumsList, .songsList {
+  color: black; /* Set font color to black for results */
+  font-size: 18px;
+  margin-top: 20px;
+  text-align: left; /* Ensure text alignment */
+  width: 60%; /* Adjust width for better alignment */
+}
+
+.searchButton,
+.clearButton {
+  /* Common styles for both buttons */
+  padding: 8px 16px; /* Example padding, adjust as needed */
+  font-size: 16px; /* Example font size, adjust as needed */
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff; /* Example background color */
+  color: #ffffff; /* Example text color */
+}
+
+.searchButton {
+  /* Specific styles for the search button */
+  /* Add any additional styles here */
+}
+
+.clearButton {
+  /* Specific styles for the clear button */
+  /* Add any additional styles here */
+}
