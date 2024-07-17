@@ -3,7 +3,7 @@ from pymongo import MongoClient
 
 # Connect to the local MongoDB instance
 client = MongoClient('localhost', 27017)
-db = client.musiclibrary  # Ensure this matches your database name in MongoDB Compass
+db = client.musiclibrary 
 
 # Load JSON data from the specified path
 json_file_path = r'D:\Proiect Darwin\data.json'

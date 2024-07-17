@@ -137,7 +137,7 @@ def get_songs():
             '_id': str(song['_id']),
             'title': song['title'],
             'length': song['length'],
-            'album': song['album']  # Assuming album is the name of the album
+            'album': song['album'] 
         } for song in songs]
         return jsonify(songs_list), 200
     except Exception as e:
