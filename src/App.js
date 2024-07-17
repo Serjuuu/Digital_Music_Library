@@ -13,7 +13,7 @@ function App() {
 
   const handleSearch = async () => {
     try {
-      const trimmedQuery = searchQuery.trim().replace(/\s+/g, ' '); // Trim and replace multiple spaces with a single space
+      const trimmedQuery = searchQuery.trim().replace(/\s+/g, ' '); 
       const response = await axios.get(`http://localhost:5000/api/search?q=${encodeURIComponent(trimmedQuery)}`);
       setSearchResults(response.data || { artists: [], albums: [], songs: [] });
       setSuggestions([]);
@@ -100,7 +100,6 @@ function App() {
             <SongsList songs={searchResults.songs} className={styles.songsList} />
           </div>
         )}
-        {/* No Results Found */}
         {searchQuery && !searchResults.artists.length && !searchResults.albums.length && !searchResults.songs.length && (
           <p className={styles.noResults}>No results found.</p>
         )}

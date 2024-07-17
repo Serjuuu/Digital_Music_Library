@@ -6,7 +6,7 @@ const ArtistsList = ({ artists }) => (
     {artists.map(artist => (
       <div key={artist._id}>
         <h2>{artist.name}</h2>
-        <AlbumsList albums={artist.albums} /> {/* Display albums first */}
+        <AlbumsList albums={artist.albums} /> 
       </div>
     ))}
   </div>
