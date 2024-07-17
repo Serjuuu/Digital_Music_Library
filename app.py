@@ -63,7 +63,6 @@ def delete_artist(id):
 
 
 # Routes for Albums
-
 @app.route('/api/albums', methods=['GET'])
 def get_albums():
     try:
@@ -78,9 +77,29 @@ def add_album():
     try:
         title = request.json['title']
         description = request.json.get('description', '')
-        artist_id = request.json['artist_id']
-        album_id = mongo.db.albums.insert_one({'title': title, 'description': description, 'artist_id': ObjectId(artist_id)}).inserted_id
-        return jsonify({'_id': str(album_id), 'title': title, 'description': description, 'artist_id': artist_id}), 201
+        artist_name = request.json['artist_name']  
+        
+        
+        artist = mongo.db.artists.find_one({'name': artist_name})
+        
+        if not artist:
+            # If artist not found, return an error message
+            return jsonify({'error': f'Artist with name {artist_name} not found'}), 404
+        
+        
+        album_id = mongo.db.albums.insert_one({
+            'title': title,
+            'artist': artist_name,
+            'description': description
+        }).inserted_id
+        
+        
+        return jsonify({
+            '_id': str(album_id),
+            'title': title,
+            'artist': artist_name,
+            'description': description
+        }), 201
     except Exception as e:
         return jsonify({'error': str(e)}), 400
 
@@ -109,9 +128,25 @@ def update_album(id):
     try:
         title = request.json['title']
         description = request.json.get('description', '')
-        artist_id = request.json['artist_id']
-        mongo.db.albums.update_one({'_id': ObjectId(id)}, {'$set': {'title': title, 'description': description, 'artist_id': ObjectId(artist_id)}})
-        return jsonify({'_id': id, 'title': title, 'description': description, 'artist_id': artist_id}), 200
+        artist_name = request.json['artist_name']  
+
+        
+        artist = mongo.db.artists.find_one({'name': artist_name})
+
+        if not artist:
+            return jsonify({'error': f'Artist with name {artist_name} not found'}), 404
+
+        mongo.db.albums.update_one(
+            {'_id': ObjectId(id)},
+            {'$set': {'title': title, 'description': description, 'artist': artist_name}}
+        )
+
+        return jsonify({
+            '_id': id,
+            'title': title,
+            'artist': artist_name,
+            'description': description
+        }), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 400
 
@@ -128,7 +163,6 @@ def delete_album(id):
 
 
 # Routes for Songs
-
 @app.route('/api/songs', methods=['GET'])
 def get_songs():
     try:
@@ -148,9 +182,31 @@ def add_song():
     try:
         title = request.json['title']
         length = request.json['length']
-        album_id = request.json['album_id']
-        song_id = mongo.db.songs.insert_one({'title': title, 'length': length, 'album_id': ObjectId(album_id)}).inserted_id
-        return jsonify({'_id': str(song_id), 'title': title, 'length': length, 'album_id': album_id}), 201
+        album_name = request.json['album_name']  
+        artist_name = request.json['artist_name']  
+
+        album = mongo.db.albums.find_one({'title': album_name})
+        
+        if not album:
+            return jsonify({'error': f'Album with title {album_name} not found'}), 404
+        
+        if album['artist'] != artist_name:
+            return jsonify({'error': f'Album {album_name} does not belong to artist {artist_name}'}), 400
+
+        song_id = mongo.db.songs.insert_one({
+            'title': title,
+            'album': album_name,
+            'artist': artist_name,
+            'length': length
+        }).inserted_id
+        
+        return jsonify({
+            '_id': str(song_id),
+            'title': title,
+            'album': album_name,
+            'artist': artist_name,
+            'length': length
+        }), 201
     except Exception as e:
         return jsonify({'error': str(e)}), 400
 
@@ -180,9 +236,31 @@ def update_song(id):
     try:
         title = request.json['title']
         length = request.json['length']
-        album_id = request.json['album_id']
-        mongo.db.songs.update_one({'_id': ObjectId(id)}, {'$set': {'title': title, 'length': length, 'album_id': ObjectId(album_id)}})
-        return jsonify({'_id': id, 'title': title, 'length': length, 'album_id': album_id}), 200
+        album_name = request.json['album_name'] 
+        artist_name = request.json['artist_name'] 
+
+        album = mongo.db.albums.find_one({'title': album_name})
+
+        if not album:
+            return jsonify({'error': f'Album with title {album_name} not found'}), 404
+        
+        if album['artist'] != artist_name:
+            return jsonify({'error': f'Album {album_name} does not belong to artist {artist_name}'}), 400
+
+        mongo.db.songs.update_one({'_id': ObjectId(id)}, {'$set': {
+            'title': title,
+            'album': album_name,
+            'artist': artist_name,
+            'length': length
+        }})
+
+        return jsonify({
+            '_id': id,
+            'title': title,
+            'album': album_name,
+            'artist': artist_name,
+            'length': length
+        }), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 400
 

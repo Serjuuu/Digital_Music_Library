@@ -5,7 +5,7 @@ client = MongoClient('localhost', 27017)
 db = client['musiclibrary']  # Replace with your database name
 
 # Select the collection to delete from
-collection_name = 'songs'  # Replace with your collection name
+collection_name = 'albums'  # Replace with your collection name
 collection = db[collection_name]
 
 try:
