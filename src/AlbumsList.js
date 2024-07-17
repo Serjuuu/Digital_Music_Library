@@ -1,5 +1,5 @@
 import React from 'react';
-import SongsList from './SongsList'; // Adjust import path as necessary
+import SongsList from './SongsList'; 
 
 const AlbumsList = ({ albums }) => (
   <div>
@@ -7,7 +7,6 @@ const AlbumsList = ({ albums }) => (
       <div key={album.title}>
         <h3>{album.title}</h3>
         <p>{album.description}</p>
-        {/* Ensure songs exist before rendering SongsList */}
         {album.songs && album.songs.length > 0 && (
           <SongsList songs={album.songs} />
         )}

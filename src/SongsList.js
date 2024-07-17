@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './App.module.css'; // Ensure correct path to your CSS module
+import styles from './App.module.css';
 
 const SongsList = ({ songs }) => (
   <ul>
