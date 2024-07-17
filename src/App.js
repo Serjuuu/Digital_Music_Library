@@ -52,7 +52,7 @@ function App() {
 
   return (
     <div className={styles.appContainer}>
-      <h1 className={styles.appTitle}>Sergiulica's Playlist</h1>
+      <h1 className={styles.appTitle}>My Music Playlist</h1>
       <div>
         <input
           type="text"

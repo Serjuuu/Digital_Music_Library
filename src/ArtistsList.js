@@ -1,6 +1,5 @@
 import React from 'react';
 import AlbumsList from './AlbumsList';
-import SongsList from './SongsList';
 
 const ArtistsList = ({ artists }) => (
   <div>
