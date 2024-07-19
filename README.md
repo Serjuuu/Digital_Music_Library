@@ -42,7 +42,7 @@
       - python -m venv venv
         source venv/bin/activate;
     4. Set up MongoDB, in my case i named my database musiclibrary containing three collections ( artists , albums and songs) and also make sure it is connected to a port ( localhost:27017 ).
-    5. Importing the data form import_data.py into the MongoDB database
+    5. Importing the data from import_data.py into the MongoDB database
     5. Run the Flask application from the terminal:
       - python app.py;
     6. For the frontend part, open a terminal and create a new directory for your frontend project:
