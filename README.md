@@ -45,12 +45,11 @@
     5. Importing the data from import_data.py into the MongoDB database
     5. Run the Flask application from the terminal:
       - python app.py;
-    6. For the frontend part, open a terminal and create a new directory for your frontend project:
-      - npx create-react-app frontend
-      - cd frontend;
+    6. For the frontend part, open a terminal with the location of the src folder in the frontend directory:
+      - cd your_path/src;
     7. Install Axios for making HTTP requests:
       - npm install axios;
-    8. Start App.js from the directory you created at step 6 and run from the terminal at that path:
+    8. Start App.js from the frontend directory and run from the terminal at that path:
       - npm start;
     
       
